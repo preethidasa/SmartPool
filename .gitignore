@@ -12,6 +12,7 @@ overlays/
 *.bak
 *.iws
 .idea
+.idea/
 *.class
 *.eml
 *.log

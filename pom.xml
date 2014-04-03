@@ -20,6 +20,7 @@
     <modules>
         <module>user</module>
         <module>carpool</module>
+        <module>smartpool-web</module>
     </modules>
 
 
