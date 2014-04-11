@@ -1,12 +1,22 @@
 package com.tw.smartpool.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Car {
-    private String number;
-    private int numberOfSeats;
+    @Id
+    private String registrationNumber;
+    @Column
+    private int capacity;
+    @OneToOne
     private Route route;
-    public Car(String number, int numberOfSeats, Route r) {
-        this.number = number;
-        this.numberOfSeats = numberOfSeats;
+
+    public Car(String registrationNumber, int capacity, Route r) {
+        this.registrationNumber = registrationNumber;
+        this.capacity = capacity;
         this.route = r;
     }
 
@@ -15,10 +25,10 @@ public class Car {
     }
 
     public boolean equals(Object obj) {
-        if(obj==null) return false;
-        if(this.getClass() != obj.getClass() ) return false;
-        if( this.number != ((Car)obj).number ) return false;
-        if( this.numberOfSeats != ((Car)obj).numberOfSeats ) return false;
-        return route.equals(((Car)obj).route);
+        if (obj == null) return false;
+        if (this.getClass() != obj.getClass()) return false;
+        if (this.registrationNumber != ((Car) obj).registrationNumber) return false;
+        if (this.capacity != ((Car) obj).capacity) return false;
+        return route.equals(((Car) obj).route);
     }
 }

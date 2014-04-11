@@ -1,16 +1,20 @@
 package com.tw.smartpool.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Arrays;
+
+@Entity
 public class Route {
+    @Id
     private int id;
-    private int totalPoints;
+    @Column
     String[] points;
-    public Route(int id, int totalPoints, String[] p) {
-        this.id = id;
-        this.totalPoints = totalPoints;
-        this.points = new String[this.totalPoints];
-        for(int i=0; i<this.totalPoints; i++) {
-            this.points[i] = p[i];
-        }
+
+    public Route(int id,String[] points){
+        this.id=id;
+        this.points = points.clone();
     }
 
     public boolean hasPoint(String p) {
@@ -19,15 +23,24 @@ public class Route {
         }
         return false;
     }
-    
-    public boolean equals(Object obj) {
-        if(obj==null) return false;
-        if(this.getClass() != obj.getClass() ) return false;
-        if( this.id != ((Route)obj).id ) return false;
-        if( this.totalPoints != ((Route)obj).totalPoints ) return false;
-        for(int i=0; i<totalPoints; i++) {
-            if( ! this.points[i].equals(((Route)obj).points[i]) ) return false;
-        }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Route route = (Route) o;
+
+        if (id != route.id) return false;
+        if (!Arrays.equals(points, route.points)) return false;
+
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (points != null ? Arrays.hashCode(points) : 0);
+        return result;
     }
 }

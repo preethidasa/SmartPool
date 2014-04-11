@@ -2,6 +2,7 @@ package com.tw.smartpool.controller;
 
 import com.tw.smartpool.db.UserDAO;
 import com.tw.smartpool.model.User;
+import com.tw.smartpool.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,7 +17,7 @@ import java.util.List;
 @Controller
 public class HomeController {
     @Autowired
-    UserDAO dao;
+    UserService userService;
 
 	@RequestMapping(value="/")
 	public ModelAndView home(HttpServletResponse response) throws IOException{
@@ -25,7 +26,7 @@ public class HomeController {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ModelAndView getUser(HttpServletResponse response,@ModelAttribute("name") String name) throws IOException{
 
-        List<User> users = dao.getUserByName(name);
+        List<User> users = userService.getUserListByName(name);
         ModelAndView modelAndView = new ModelAndView("user");
         modelAndView.addObject("users",users);
         return modelAndView;

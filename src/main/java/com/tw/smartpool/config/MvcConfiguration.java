@@ -1,5 +1,6 @@
 package com.tw.smartpool.config;
 
+import org.hibernate.engine.transaction.internal.jta.JtaTransactionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -7,6 +8,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -19,8 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@ComponentScan(basePackages="com.com.tw")
+@ComponentScan(basePackages="{com.tw.smartpool.controller}")
 @EnableWebMvc
+@EnableTransactionManagement
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
 
 	@Bean
@@ -48,11 +51,11 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
     @Bean
     public LocalContainerEntityManagerFactoryBean getEntityManagerFactory(){
         LocalContainerEntityManagerFactoryBean entityManagerFactory= new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactory.setPersistenceUnitName("punit");
+//        entityManagerFactory.setPersistenceUnitName("punit");
         entityManagerFactory.setDataSource(getDataSource());
         entityManagerFactory.setJpaVendorAdapter(getJpaVendorAdapter());
         entityManagerFactory.setJpaPropertyMap(getJpaPropertyMap());
-        entityManagerFactory.setPackagesToScan("com.com.tw");
+        entityManagerFactory.setPackagesToScan("com.tw.smartpool");
         return entityManagerFactory;
     }
 
@@ -72,7 +75,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
         return  dataSource;
     }
 
-    private HibernateJpaVendorAdapter getJpaVendorAdapter(){
+    @Bean
+    public HibernateJpaVendorAdapter getJpaVendorAdapter(){
         HibernateJpaVendorAdapter adapter= new HibernateJpaVendorAdapter();
         adapter.setShowSql(true);
         return adapter;
