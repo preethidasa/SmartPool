@@ -3,6 +3,9 @@ package com.tw.smartpool.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+;
 
 @Entity
 public class User {
@@ -15,16 +18,20 @@ public class User {
     private String lastName;
     @Column(name = "location")
     private String location;
+    @ManyToOne
+    private Car car;
 
-    public User() { // do not remove. essential for hibernate
+    private User() {
+
     }
 
-    public User(String empId, String firstName, String lastName, String location) {
+    public User(String empId, String firstName, String lastName, String location, Car car) {
 
         this.empId = empId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.location = location;
+        this.car = car;
     }
 
     public String getEmpId() {
@@ -57,5 +64,13 @@ public class User {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 }
