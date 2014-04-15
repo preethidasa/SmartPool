@@ -4,23 +4,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home</title>
+        <title>Success</title>
     </head>
 
     <body>
 
         <h1>Hello </h1>
+        <br>
+        <p>User added Successfully</p>
 
-                <br>
-                <p>
-                Enter name you want to search.
-                <br>
-                <form action='/smartpool/users' method=GET>
-                <input type=text name='name'>
-                <input type=submit value='Search'>
-                </form>
-                </p>
-
-        <p>This is the search page!</p>
     </body>
 </html>

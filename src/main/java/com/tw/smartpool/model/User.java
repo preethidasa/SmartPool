@@ -58,4 +58,21 @@ public class User {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!empId.equals(user.empId)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return empId.hashCode();
+    }
 }

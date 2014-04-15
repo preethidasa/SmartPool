@@ -13,7 +13,7 @@ public class UserService {
     @Autowired
     UserDAO dao;
 
-    public UserService() {
+    private UserService() {
     }
 
     public UserService(UserDAO dao) {
@@ -23,5 +23,11 @@ public class UserService {
     @Transactional
     public List<User> getUserListByName(String name){
         return dao.getUserByName(name);
+    }
+
+    public boolean addUser(String empId, String firstName, String lastName, String location) {
+        if(null == empId || null == firstName || null == location || "".equals(empId) || "".equals(firstName) || "".equals(location))
+            return false;
+        return dao.addUser(new User(empId,firstName,lastName,location));
     }
 }
