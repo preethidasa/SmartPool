@@ -16,7 +16,7 @@ public class User {
     @Column(name = "location")
     private String location;
 
-    public User() { // do not remove. essential for hibernate
+    private User() {
     }
 
     public User(String empId, String firstName, String lastName, String location) {
