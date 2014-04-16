@@ -24,11 +24,20 @@ public class Car {
         return this.route.hasPoint(point);
     }
 
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
-        if (this.getClass() != obj.getClass()) return false;
-        if (this.registrationNumber != ((Car) obj).registrationNumber) return false;
-        if (this.capacity != ((Car) obj).capacity) return false;
-        return route.equals(((Car) obj).route);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Car car = (Car) o;
+
+        if (!registrationNumber.equals(car.registrationNumber)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return registrationNumber.hashCode();
     }
 }
