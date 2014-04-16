@@ -3,7 +3,6 @@ package com.tw.smartpool.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Arrays;
 
 @Entity
 public class Route {
@@ -32,15 +31,12 @@ public class Route {
         Route route = (Route) o;
 
         if (id != route.id) return false;
-        if (!Arrays.equals(points, route.points)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (points != null ? Arrays.hashCode(points) : 0);
-        return result;
+        return id;
     }
 }
