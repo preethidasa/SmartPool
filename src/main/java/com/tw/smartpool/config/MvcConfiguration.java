@@ -83,7 +83,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
     private Map<String,String> getJpaPropertyMap(){
         Map<String,String> map = new HashMap<>(3);
         map.put("hibernate.dialect","org.hibernate.dialect.MySQL5InnoDBDialect");    //TODO pull out properties to a file
-        map.put("hibernate.hbm2ddl.auto","create");
+        map.put("hibernate.hbm2ddl.auto","update");
         map.put("hibernate.format_sql","true");
         return map;
     }
