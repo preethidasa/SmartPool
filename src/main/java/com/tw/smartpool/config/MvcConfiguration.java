@@ -1,6 +1,5 @@
 package com.tw.smartpool.config;
 
-import org.hibernate.engine.transaction.internal.jta.JtaTransactionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@ComponentScan(basePackages="{com.tw.smartpool.controller}")
+@ComponentScan(basePackages = "com.tw.smartpool")
 @EnableWebMvc
 @EnableTransactionManagement
 public class MvcConfiguration extends WebMvcConfigurerAdapter{
@@ -51,7 +50,6 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
     @Bean
     public LocalContainerEntityManagerFactoryBean getEntityManagerFactory(){
         LocalContainerEntityManagerFactoryBean entityManagerFactory= new LocalContainerEntityManagerFactoryBean();
-//        entityManagerFactory.setPersistenceUnitName("punit");
         entityManagerFactory.setDataSource(getDataSource());
         entityManagerFactory.setJpaVendorAdapter(getJpaVendorAdapter());
         entityManagerFactory.setJpaPropertyMap(getJpaPropertyMap());
@@ -85,7 +83,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter{
     private Map<String,String> getJpaPropertyMap(){
         Map<String,String> map = new HashMap<>(3);
         map.put("hibernate.dialect","org.hibernate.dialect.MySQL5InnoDBDialect");    //TODO pull out properties to a file
-        map.put("hibernate.hbm2ddl.auto","none");
+        map.put("hibernate.hbm2ddl.auto","create");
         map.put("hibernate.format_sql","true");
         return map;
     }

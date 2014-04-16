@@ -1,6 +1,8 @@
 package com.tw.smartpool.service;
 
+import com.tw.smartpool.db.LocationDAO;
 import com.tw.smartpool.db.UserDAO;
+import com.tw.smartpool.model.Location;
 import com.tw.smartpool.model.User;
 import org.junit.Test;
 
@@ -16,9 +18,11 @@ public class UserServiceTest {
     @Test
     public void shouldGetUserListWithGivenUser(){
         UserDAO dao = mock(UserDAO.class);
-        User user = new User("12345","manu","viswam","tcr");
+        LocationDAO locationDAO = mock(LocationDAO.class);
+
+        User user = new User("12345","manu","viswam",new Location(1,"Test"));
         when(dao.getUserByName("man")).thenReturn(Arrays.asList(user));
-        UserService userService =new UserService(dao);
+        UserService userService =new UserService(dao, locationDAO);
         List<User> userList = userService.getUserListByName("man");
         assertEquals(user,userList.get(0));
     }
@@ -26,9 +30,11 @@ public class UserServiceTest {
     @Test
     public void shouldReturnTrueIfDataIsPersisted() throws Exception {
         UserDAO dao = mock(UserDAO.class);
-        User user = new User("12345","manu","viswam","tcr");
+        LocationDAO locationDAO = mock(LocationDAO.class);
+        User user = new User("12345","manu","viswam",new Location(1,"Test"));
         when(dao.addUser(user)).thenReturn(true);
-        UserService userService = new UserService(dao);
-        assertTrue(userService.addUser("12345","manu","viswam","tcr"));
+        when(locationDAO.getById(1)).thenReturn(new Location(1,"Test"));
+        UserService userService = new UserService(dao, locationDAO);
+        assertTrue(userService.addUser("12345","manu","viswam","1"));
     }
 }

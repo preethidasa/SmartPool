@@ -1,5 +1,6 @@
 package com.tw.smartpool.db;
 
+import com.tw.smartpool.model.Location;
 import com.tw.smartpool.model.User;
 import junit.framework.Assert;
 import org.junit.Before;
@@ -30,7 +31,7 @@ public class UserDAOTest {
     @Test
     public void shouldReturnUserList() throws Exception {
         List<User> users= new ArrayList<User>(1);
-        users.add(new User("12345","manu","viswam","tcr"));
+        users.add(new User("12345","manu","viswam",new Location(1,"Test")));
         when(query.getResultList()).thenReturn(users);
         List<User> userList = userDAO.getUserByName("manu");
         for(User user : userList){
@@ -40,8 +41,8 @@ public class UserDAOTest {
 
     @Test
     public void shouldCallMethodsOfEntityManager() throws Exception {
-        userDAO.addUser(new User("12345","manu","viswam","tcr"));
-        verify(entityManager,times(1)).persist(User.class);
+        userDAO.addUser(new User("12345","manu","viswam",new Location(1,"Test")));
+        verify(entityManager,times(1)).persist(anyObject());
         verify(entityManager,times(1)).flush();
     }
 

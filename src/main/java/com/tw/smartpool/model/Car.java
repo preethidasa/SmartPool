@@ -8,6 +8,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Car {
     @Id
+    @Column(length = 10)
     private String registrationNumber;
     @Column
     private int capacity;

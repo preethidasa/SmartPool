@@ -1,5 +1,6 @@
 package com.tw.smartpool.controller;
 
+import com.tw.smartpool.model.Location;
 import com.tw.smartpool.model.User;
 import com.tw.smartpool.service.UserService;
 import org.junit.Before;
@@ -34,13 +35,13 @@ public class HomeControllerTest {
     @Test
     public void shouldAddUser() throws Exception {
         when(service.addUser("12345","manu","viswam","tcr")).thenReturn(true);
-        ModelAndView mav = controller.addUser("12345","manu","viswam","tcr");
+        ModelAndView mav = controller.addUser("12345","manu","viswam","1");
         assertEquals(new ModelAndView("success").getView(), mav.getView());
     }
 
     @Test
     public void shouldGetUserView() throws Exception {
-        User user = new User("12345","manu","viswam","kerala");
+        User user = new User("12345","manu","viswam",new Location(1,"Test"));
         when(service.getUserListByName("manu")).thenReturn(Arrays.asList(user));
         ModelAndView mav = controller.getUser(new MockHttpServletResponse(),"manu");
         assertEquals(user,((List)mav.getModelMap().get("users")).get(0));

@@ -39,8 +39,8 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
-    public ModelAndView addUser(@ModelAttribute("emp_id") String empId,@ModelAttribute("first_name") String firstName,@ModelAttribute("last_name") String lastName, @ModelAttribute("location") String location){
-        if(userService.addUser(empId,firstName,lastName,location))
+    public ModelAndView addUser(@ModelAttribute("emp_id") String empId,@ModelAttribute("first_name") String firstName,@ModelAttribute("last_name") String lastName, @ModelAttribute("location") String locationId){
+        if(userService.addUser(empId,firstName,lastName,locationId))
             return new ModelAndView("success");
         return new ModelAndView("error");
     }

@@ -3,24 +3,24 @@ package com.tw.smartpool.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class User {
     @Id
-    @Column(name = "emp_id")
+    @Column(name = "emp_id",length = 10)
     private String empId;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "location")
-    private String location;
+    @ManyToOne
+    private Location location;
 
     private User() {
     }
 
-    public User(String empId, String firstName, String lastName, String location) {
-
+    public User(String empId, String firstName, String lastName, Location location) {
         this.empId = empId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,44 +31,24 @@ public class User {
         return empId;
     }
 
-    public void setEmpId(String empId) {
-        this.empId = empId;
-    }
-
     public String getFirstName() {
         return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getLocation() {
+    public Location getLocation() {
         return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        if (!empId.equals(user.empId)) return false;
-
-        return true;
+        if (o == null) return false;
+        if(this == o) return true;
+        if(this.getClass() != o.getClass()) return false;
+        return empId.equals( ((User)o).empId );
     }
 
     @Override
