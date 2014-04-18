@@ -1,6 +1,7 @@
 package com.tw.smartpool.model;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class Route {
     @Id
     private int id;
     @Column
+    @ElementCollection(targetClass = Location.class)
     List<Location> dropPoints;
 
     public Route(int id, List<Location> dropPoints) {

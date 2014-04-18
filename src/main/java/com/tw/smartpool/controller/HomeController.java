@@ -1,6 +1,7 @@
 package com.tw.smartpool.controller;
 
 import com.tw.smartpool.model.User;
+import com.tw.smartpool.service.CarPoolService;
 import com.tw.smartpool.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ import java.util.List;
 public class HomeController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    CarPoolService poolService;
 
     private HomeController() {
     }
@@ -38,10 +42,16 @@ public class HomeController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/users/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/users", method = RequestMethod.POST)
     public ModelAndView addUser(@ModelAttribute("emp_id") String empId,@ModelAttribute("first_name") String firstName,@ModelAttribute("last_name") String lastName, @ModelAttribute("location") String locationId){
         if(userService.addUser(empId,firstName,lastName,locationId))
             return new ModelAndView("success");
         return new ModelAndView("error");
+    }
+
+    @RequestMapping(value = "/carpool", method = RequestMethod.POST)
+    public void addCarPool(){
+        poolService.addCarPool();
+
     }
 }

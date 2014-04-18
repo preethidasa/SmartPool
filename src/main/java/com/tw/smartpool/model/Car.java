@@ -3,7 +3,6 @@ package com.tw.smartpool.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Car {
@@ -12,17 +11,13 @@ public class Car {
     private String registrationNumber;
     @Column
     private int capacity;
-    @OneToOne
-    private Route route;
 
-    public Car(String registrationNumber, int capacity, Route r) {
-        this.registrationNumber = registrationNumber;
-        this.capacity = capacity;
-        this.route = r;
+    public Car() {
     }
 
-    public boolean hasPointOnRoute(String point) {
-        return this.route.hasPoint(point);
+    public Car(String registrationNumber, int capacity) {
+        this.registrationNumber = registrationNumber;
+        this.capacity = capacity;
     }
 
     @Override
