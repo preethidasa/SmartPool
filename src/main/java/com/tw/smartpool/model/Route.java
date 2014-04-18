@@ -3,21 +3,23 @@ package com.tw.smartpool.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Route {
     @Id
     private int id;
     @Column
-    String[] points;
+    List<Location> dropPoints;
 
-    public Route(int id,String[] points){
-        this.id=id;
-        this.points = points.clone();
+    public Route(int id, List<Location> dropPoints) {
+        this.id = id;
+        this.dropPoints = new ArrayList<Location>(dropPoints);
     }
 
-    public boolean hasPoint(String p) {
-        for(String point: points) {
+    public boolean hasPoint(Location p) {
+        for(Location point: dropPoints) {
             if( point.equals(p)) return true;
         }
         return false;
