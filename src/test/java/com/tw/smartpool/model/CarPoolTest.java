@@ -13,7 +13,7 @@ public class CarPoolTest {
     @Test
 
     public void shouldAddUserToCarPool() {
-        User user = new User("123", "manu", "sunnyp", "cochin");
+        User user = new User("123", "manu", "sunnyp", new Location(1,"Bellandhur"));
         List<User> newList = new ArrayList<User>();
         CarPool carPool = new CarPool( 12, mock(Route.class), mock(Car.class), newList);
         carPool.addUser(user);

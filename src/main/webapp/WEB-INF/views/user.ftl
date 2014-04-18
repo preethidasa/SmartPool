@@ -17,7 +17,7 @@
 
                 <#list users as user>
                 <tr>
-                 <td>${user.empId} </td><td>${user.firstName}</td><td>${user.lastName}</td> <td>${user.location}</td>
+                 <td>${user.empId} </td><td>${user.firstName}</td><td>${user.lastName}</td> <td>${user.location.name} </td>
                  </tr>
                 </#list>
                 </table>
